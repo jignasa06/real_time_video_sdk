@@ -8,6 +8,9 @@ import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/auth/presentation/bloc/auth_event.dart';
 import '../../features/auth/presentation/bloc/auth_state.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
+import '../../features/video_call/presentation/pages/video_call_page.dart' as video_call;
+import '../../features/video_call/presentation/bloc/video_call_bloc.dart';
+import '../di/injection.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -85,8 +88,83 @@ class UsersPage extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: Text(AppStrings.usersPage),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.video_call_rounded,
+              size: 100,
+              color: Colors.blue,
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              AppStrings.readyToStartVideoCall,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              onPressed: () {
+                final channelName = 'test-room-${DateTime.now().millisecondsSinceEpoch}';
+                final uid = DateTime.now().millisecondsSinceEpoch % 100000;
+                context.go('${AppRoutes.videoCallRoute}?channel=$channelName&uid=$uid');
+              },
+              icon: const Icon(Icons.videocam),
+              label: const Text(AppStrings.startVideoCall),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                textStyle: const TextStyle(fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 16),
+            OutlinedButton.icon(
+              onPressed: () {
+                _showJoinRoomDialog(context);
+              },
+              icon: const Icon(Icons.meeting_room),
+              label: const Text(AppStrings.joinExistingRoom),
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                textStyle: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showJoinRoomDialog(BuildContext context) {
+    final channelController = TextEditingController();
+    
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text(AppStrings.joinRoom),
+        content: TextField(
+          controller: channelController,
+          decoration: const InputDecoration(
+            labelText: AppStrings.roomName,
+            hintText: AppStrings.enterRoomName,
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text(AppStrings.cancel),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (channelController.text.isNotEmpty) {
+                final uid = DateTime.now().millisecondsSinceEpoch % 100000;
+                Navigator.pop(dialogContext);
+                context.go('${AppRoutes.videoCallRoute}?channel=${channelController.text}&uid=$uid');
+              }
+            },
+            child: const Text(AppStrings.join),
+          ),
+        ],
       ),
     );
   }
@@ -128,7 +206,18 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.videoCallRoute,
         name: AppRoutes.videoCallRouteName,
-        builder: (context, state) => const VideoCallPage(),
+        builder: (context, state) {
+          final channelName = state.uri.queryParameters['channel'] ?? 'test-room';
+          final uid = int.tryParse(state.uri.queryParameters['uid'] ?? '0') ?? 0;
+          
+          return BlocProvider(
+            create: (context) => getIt<VideoCallBloc>(),
+            child: video_call.VideoCallPage(
+              channelName: channelName,
+              uid: uid,
+            ),
+          );
+        },
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

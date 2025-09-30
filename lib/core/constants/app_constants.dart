@@ -13,4 +13,8 @@ class AppConstants {
 
   static const String mockEmail = 'eve.holt@reqres.in';
   static const String mockPassword = 'cityslicka';
+  
+  // Agora Configuration
+  static const String agoraAppId = '6ea7e8a98ace40a096a12ded8417ba3d'; // Replace with your Agora App ID
+  static const String agoraToken = ''; // Optional: Add token for production
 }
