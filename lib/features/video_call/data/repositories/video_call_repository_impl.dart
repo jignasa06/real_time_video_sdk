@@ -91,6 +91,33 @@ class VideoCallRepositoryImpl implements VideoCallRepository {
   }
 
   @override
+<<<<<<< HEAD
+=======
+  Future<Either<Failure, void>> startScreenShare() async {
+    try {
+      await agoraService.startScreenShare();
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    } catch (e) {
+      return Left(ServerFailure('${AppStrings.failedToStartScreenShare}: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> stopScreenShare() async {
+    try {
+      await agoraService.stopScreenShare();
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    } catch (e) {
+      return Left(ServerFailure('${AppStrings.failedToStopScreenShare}: ${e.toString()}'));
+    }
+  }
+
+  @override
+>>>>>>> feature/improve-agora-service
   Future<Either<Failure, void>> dispose() async {
     try {
       await agoraService.dispose();

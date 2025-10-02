@@ -47,6 +47,10 @@ class AppStrings {
   static const String failedToJoinChannel = 'Failed to join channel';
   static const String failedToLeaveChannel = 'Failed to leave channel';
   static const String failedToDisposeEngine = 'Failed to dispose engine';
+  static const String failedToStartScreenShare = 'Failed to start screen share';
+  static const String failedToStopScreenShare = 'Failed to stop screen share';
+  static const String screenShare = 'Screen';
+  static const String sharingScreen = 'Sharing Screen...';
   
   static const String emailRequired = 'Email is required';
   static const String validEmail = 'Please enter a valid email';

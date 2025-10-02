@@ -42,6 +42,13 @@ class SwitchCamera extends VideoCallEvent {
   const SwitchCamera();
 }
 
+<<<<<<< HEAD
+=======
+class ToggleScreenShare extends VideoCallEvent {
+  const ToggleScreenShare();
+}
+
+>>>>>>> feature/improve-agora-service
 class UserJoined extends VideoCallEvent {
   final int uid;
 

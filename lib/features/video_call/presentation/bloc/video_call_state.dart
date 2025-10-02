@@ -30,6 +30,10 @@ class VideoCallConnected extends VideoCallState {
   final List<CallParticipant> remoteUsers;
   final bool isMicrophoneMuted;
   final bool isCameraMuted;
+<<<<<<< HEAD
+=======
+  final bool isScreenSharing;
+>>>>>>> feature/improve-agora-service
 
   const VideoCallConnected({
     required this.channelName,
@@ -37,6 +41,10 @@ class VideoCallConnected extends VideoCallState {
     this.remoteUsers = const [],
     this.isMicrophoneMuted = false,
     this.isCameraMuted = false,
+<<<<<<< HEAD
+=======
+    this.isScreenSharing = false,
+>>>>>>> feature/improve-agora-service
   });
 
   VideoCallConnected copyWith({
@@ -45,6 +53,10 @@ class VideoCallConnected extends VideoCallState {
     List<CallParticipant>? remoteUsers,
     bool? isMicrophoneMuted,
     bool? isCameraMuted,
+<<<<<<< HEAD
+=======
+    bool? isScreenSharing,
+>>>>>>> feature/improve-agora-service
   }) {
     return VideoCallConnected(
       channelName: channelName ?? this.channelName,
@@ -52,10 +64,15 @@ class VideoCallConnected extends VideoCallState {
       remoteUsers: remoteUsers ?? this.remoteUsers,
       isMicrophoneMuted: isMicrophoneMuted ?? this.isMicrophoneMuted,
       isCameraMuted: isCameraMuted ?? this.isCameraMuted,
+<<<<<<< HEAD
+=======
+      isScreenSharing: isScreenSharing ?? this.isScreenSharing,
+>>>>>>> feature/improve-agora-service
     );
   }
 
   @override
+<<<<<<< HEAD
   List<Object?> get props => [
         channelName,
         localUid,
@@ -63,6 +80,9 @@ class VideoCallConnected extends VideoCallState {
         isMicrophoneMuted,
         isCameraMuted,
       ];
+=======
+  List<Object?> get props => [channelName, localUid, remoteUsers, isMicrophoneMuted, isCameraMuted, isScreenSharing];
+>>>>>>> feature/improve-agora-service
 }
 
 class VideoCallDisconnected extends VideoCallState {

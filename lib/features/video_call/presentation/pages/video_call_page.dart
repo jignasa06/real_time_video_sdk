@@ -202,12 +202,22 @@ class _VideoCallPageState extends State<VideoCallPage> {
           child: VideoCallControls(
             isMicrophoneMuted: state.isMicrophoneMuted,
             isCameraMuted: state.isCameraMuted,
+<<<<<<< HEAD
+=======
+            isScreenSharing: state.isScreenSharing,
+>>>>>>> feature/improve-agora-service
             onToggleMicrophone: () {
               context.read<VideoCallBloc>().add(const ToggleMicrophone());
             },
             onToggleCamera: () {
               context.read<VideoCallBloc>().add(const ToggleCamera());
             },
+<<<<<<< HEAD
+=======
+            onToggleScreenShare: () {
+              context.read<VideoCallBloc>().add(const ToggleScreenShare());
+            },
+>>>>>>> feature/improve-agora-service
             onSwitchCamera: () {
               context.read<VideoCallBloc>().add(const SwitchCamera());
             },

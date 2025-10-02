@@ -14,6 +14,10 @@ class VideoCallBloc extends Bloc<VideoCallEvent, VideoCallState> {
     on<ToggleMicrophone>(_onToggleMicrophone);
     on<ToggleCamera>(_onToggleCamera);
     on<SwitchCamera>(_onSwitchCamera);
+<<<<<<< HEAD
+=======
+    on<ToggleScreenShare>(_onToggleScreenShare);
+>>>>>>> feature/improve-agora-service
     on<UserJoined>(_onUserJoined);
     on<UserLeft>(_onUserLeft);
     on<DisposeEngine>(_onDisposeEngine);
@@ -112,6 +116,34 @@ class VideoCallBloc extends Bloc<VideoCallEvent, VideoCallState> {
     );
   }
 
+<<<<<<< HEAD
+=======
+  Future<void> _onToggleScreenShare(
+    ToggleScreenShare event,
+    Emitter<VideoCallState> emit,
+  ) async {
+    if (state is VideoCallConnected) {
+      final currentState = state as VideoCallConnected;
+      
+      if (currentState.isScreenSharing) {
+        // Stop screen sharing
+        final result = await repository.stopScreenShare();
+        result.fold(
+          (failure) => emit(VideoCallError(failure.message)),
+          (_) => emit(currentState.copyWith(isScreenSharing: false)),
+        );
+      } else {
+        // Start screen sharing
+        final result = await repository.startScreenShare();
+        result.fold(
+          (failure) => emit(VideoCallError(failure.message)),
+          (_) => emit(currentState.copyWith(isScreenSharing: true)),
+        );
+      }
+    }
+  }
+
+>>>>>>> feature/improve-agora-service
   void _onUserJoined(
     UserJoined event,
     Emitter<VideoCallState> emit,

@@ -12,5 +12,10 @@ abstract class VideoCallRepository {
   Future<Either<Failure, void>> toggleMicrophone();
   Future<Either<Failure, void>> toggleCamera();
   Future<Either<Failure, void>> switchCamera();
+<<<<<<< HEAD
+=======
+  Future<Either<Failure, void>> startScreenShare();
+  Future<Either<Failure, void>> stopScreenShare();
+>>>>>>> feature/improve-agora-service
   Future<Either<Failure, void>> dispose();
 }

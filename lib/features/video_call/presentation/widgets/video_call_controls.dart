@@ -5,18 +5,34 @@ import '../../../../core/theme/app_colors.dart';
 class VideoCallControls extends StatelessWidget {
   final bool isMicrophoneMuted;
   final bool isCameraMuted;
+<<<<<<< HEAD
   final VoidCallback onToggleMicrophone;
   final VoidCallback onToggleCamera;
   final VoidCallback onSwitchCamera;
+=======
+  final bool isScreenSharing;
+  final VoidCallback onToggleMicrophone;
+  final VoidCallback onToggleCamera;
+  final VoidCallback onSwitchCamera;
+  final VoidCallback onToggleScreenShare;
+>>>>>>> feature/improve-agora-service
   final VoidCallback onEndCall;
 
   const VideoCallControls({
     super.key,
     required this.isMicrophoneMuted,
     required this.isCameraMuted,
+<<<<<<< HEAD
     required this.onToggleMicrophone,
     required this.onToggleCamera,
     required this.onSwitchCamera,
+=======
+    required this.isScreenSharing,
+    required this.onToggleMicrophone,
+    required this.onToggleCamera,
+    required this.onSwitchCamera,
+    required this.onToggleScreenShare,
+>>>>>>> feature/improve-agora-service
     required this.onEndCall,
   });
 
@@ -50,6 +66,15 @@ class VideoCallControls extends StatelessWidget {
             isActive: !isCameraMuted,
           ),
           _buildControlButton(
+<<<<<<< HEAD
+=======
+            icon: Icons.screen_share,
+            label: AppStrings.screenShare,
+            onPressed: onToggleScreenShare,
+            isActive: isScreenSharing,
+          ),
+          _buildControlButton(
+>>>>>>> feature/improve-agora-service
             icon: Icons.flip_camera_ios,
             label: AppStrings.flip,
             onPressed: onSwitchCamera,
